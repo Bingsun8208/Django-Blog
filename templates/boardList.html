@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ board.boardName }}板块列表 {% endblock %}
+
+{% block content %}
+
+    <div class="content-wrap">
+        <div id="content">
+            <table class="table table-striped">
+                <tbody>
+                {% for item in articleList %}
+                    <tr>
+                        <td>
+                            <div class="articleList">
+                                <div class="title">
+                                    <h3><a href="">{{ item.articleTitle }}</a></h3>
+                                    <div class="readcounts  pull-right">
+                                        <span class="badge">{{ item.replies_set.count }}</span>
+                                    </div>
+                                </div>
+                                <div class="remarks">
+                                    <span><a href="{% url 'ArticleApp.views.board' item.boards.boardName %}">{{ item.boards.boardName }}</a></span>•
+                                    <span><a href="#">{{ item.author_id }}</a></span>•
+                                    <span>{{item.publishDate}}</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

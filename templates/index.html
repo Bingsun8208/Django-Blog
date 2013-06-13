@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} 茶隼的Django博客 {% endblock %}
+
+{% block content %}
+    <div class="navbar navbar-static-top">
+        <div class='navbar-inner'>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    {% for board in boardList %}
+                        <li><a href="{% url 'ArticleApp.views.board' board.boardName %}">{{ board.boardName }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content-wrap">
+        <div id="content">
+            <table class="table table-striped">
+                <tbody>
+                {% for item in articleList %}
+                    <tr>
+                        <td>
+                            <div class="articleList">
+                                <div class="title">
+                                    <h3><a href="{% url 'ArticleApp.views.article' item.articleId %}">{{ item.articleTitle }}</a></h3>
+                                    <div class="readcounts  pull-right">
+                                        <span class="badge">{{ item.replies_set.count }}</span>
+                                    </div>
+                                </div>
+                                <div class="remarks">
+                                    <span><a href="{% url 'ArticleApp.views.board' item.boards.boardName %}">{{ item.boards.boardName }}</a></span>•
+                                    <span><a href="#">{{ item.author_id }}</a></span>•
+                                    <span>{{ item.publishDate | date:'Y-m-d G:i:s' }}</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

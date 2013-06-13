@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock %}
+
+{% block content %}
+
+    <div id="content">
+        {% for item in articleList %}
+            <div class="articleList">
+                <div class="title">
+                    <h2><a href="">{{item.articleTitle}}</a></h2>
+                </div>
+                <div class="remarks">
+                    <span><a href=""><!--模块--></a></span>•
+                    <span><a href=""><!--作者--></a></span>•
+                    <span><!--浏览次数--></span>•
+                    <span>{{item.publishDate}}</span>•
+                    <span>最新回复来自&nbsp;</span>
+                </div>
+                <div class="readcounts">
+                    <span class="badge">0</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

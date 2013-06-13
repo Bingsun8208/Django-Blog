@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ article.articleTitle }} - 茶隼的Django博客 {% endblock %}
+
+{% block content %}
+    <h3>{{ article.articleTitle }}</h3>
+    <div class="remarks">
+        <span><a href="{% url 'ArticleApp.views.board' article.boards.boardName %}">{{ article.boards.boardName }}</a></span>•
+        <span><a href="#">{{ article.author_id }}</a></span>•
+        <span>{{ article.publishDate | date:'Y-m-d G:i:s' }}</span>
+    </div>
+    <div class="hero">
+        <div class="row-fluid">
+            {{ article.contents }}
+        </div>
+    </div>
+    <div>
+        {% if replyList.count > 0 %}
+            <table class="table table-striped">
+                <tbody>
+                    {% for item in replyList %}
+                    <tr>
+                        <td>
+                            <div>
+                                回复人：{{ item.author_id }}，回复时间：{{ item.publishDate | date:'Y-m-d G:i:s' }}
+                            </div>
+                            <div>
+                                {{ item.contents }}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        {% else %}
+
+        {% endif %}
+        <div>
+            {% if sessionUserName %}
+                <a href="#">回帖</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
